@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MasterClass Courses
+
+A Next.js application that displays MasterClass courses and allows users to manage their favorites.
+
+## Features
+
+- Course catalog with instructor information
+- Add/remove favorites functionality with visual indicators
+- Filter between all courses and favorites
+- Responsive design with visual polish
+- Loading indicators and toast notifications
+
+## Screenshots
+
+### Course Listing
+
+![Course Listing](.screenshots/course-listing.png)
+
+### Favorites View
+
+![Favorites View](.screenshots/favorites-view.png)
+
+### Add Favorite
+
+![Add Favorite](.screenshots/add-favorite.png)
+
+### Remove Favorite
+
+![Remove Favorite](.screenshots/remove-favorite.png)
+
+### Processing Multiple
+
+![Processing Multiple](.screenshots/processing-multiple.png)
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ and npm/yarn
+
+### Installation
+
+1. Clone the repository
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech Stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Next.js**: React framework
+- **Tailwind CSS**: For styling
+- **React Hot Toast**: For notifications
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+my-courses-manuel/
+  ├── app/               # Next.js app directory
+  │   ├── courses/       # Courses page
+  │   ├── api/           # API routes
+  │   ├── layout.js      # App layout
+  │   ├── page.js        # Home page
+  │   ├── types/         # TypeScript types
+  │   └── components/    # Shared components
+  ├── .screenshots/      # Screenshots for README
+  └── public/            # Static assets
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Future Improvements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Given more time, I would implement:
 
-## Deploy on Vercel
+- Server-side rendering for initial page load to improve LCP (Largest Contentful Paint)
+- Caching strategy with 1-hour TTL to reduce API calls
+- Responsive design for all screen sizes
+- Infinite scroll pagination for better UX with large datasets
+- Image preloading for visible course instructors
+- Offline mode using service workers
+- Integration tests to ensure functionality works correctly
+- AB testing setup to measure the effectiveness of UX changes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Accessibility Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Proper semantic HTML structure
+- Keyboard navigation support
+- Accessible color contrast
+- ARIA labels for interactive elements
