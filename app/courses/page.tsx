@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import { fetchCourses } from '@/app/api/courses';
 import CourseList from '@/app/components/CourseList';
+import FilterToggle from '@/app/components/FilterToggle';
 import { Toaster } from 'react-hot-toast';
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
 
   useEffect(() => {
     async function loadCourses() {
@@ -25,7 +27,21 @@ export default function CoursesPage() {
     }
 
     loadCourses();
+
+    // In a production app, could implement a cache refresh interval here
+    // Commented implementation would look like:
+    /*
+    const refreshInterval = setInterval(() => {
+      loadCourses();
+    }, 60 * 60 * 1000); // Refresh every hour
+    
+    return () => clearInterval(refreshInterval);
+    */
   }, []);
+
+  const displayedCourses = showOnlyFavorites
+    ? courses.filter((course) => course.favorite)
+    : courses;
 
   const handleFavoriteToggle = (updatedCourse: Course) => {
     setCourses((prevCourses) =>
@@ -69,9 +85,27 @@ export default function CoursesPage() {
 
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <h1 className="text-3xl font-bold">MasterClass Courses</h1>
+
+        <FilterToggle
+          showOnlyFavorites={showOnlyFavorites}
+          setShowOnlyFavorites={setShowOnlyFavorites}
+        />
       </div>
 
-      <CourseList courses={courses} onFavoriteToggle={handleFavoriteToggle} />
+      <CourseList
+        courses={displayedCourses}
+        onFavoriteToggle={handleFavoriteToggle}
+      />
+
+      {/* Commented out - would implement for infinite scroll
+      <div >
+        <button 
+          onClick={() => loadMore()}
+        >
+          Load More
+        </button>
+      </div>
+      */}
     </div>
   );
 }

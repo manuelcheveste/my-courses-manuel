@@ -1,5 +1,6 @@
 import { useState, KeyboardEvent } from 'react';
 import { addToFavorites, removeFromFavorites } from '@/app/api/courses';
+import Image from 'next/image';
 import toast from 'react-hot-toast';
 
 type CourseListProps = {
@@ -95,15 +96,13 @@ export default function CourseList({
                 className="absolute -top-2 -right-2 bg-yellow-400 text-white rounded-full w-6 h-6 flex items-center justify-center"
                 aria-hidden="true"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                </svg>
+                <Image
+                  className="dark:invert"
+                  src="/star-icon.svg"
+                  alt=""
+                  width={14}
+                  height={14}
+                />
               </div>
             )}
 
@@ -118,8 +117,20 @@ export default function CourseList({
           </div>
 
           <div>
-            <h3 className="font-bold text-lg">{course.instructorName}</h3>
-            <p className="text-gray-600">{course.title}</p>
+            <h2
+              className={`text-gray-500 font-bold text-lg ${
+                !course.favorite ? 'text-white' : ''
+              }`}
+            >
+              {course.instructorName}
+            </h2>
+            <p
+              className={`text-gray-600 ${
+                !course.favorite ? 'text-neutral-300' : ''
+              }`}
+            >
+              {course.title}
+            </p>
           </div>
         </button>
       ))}

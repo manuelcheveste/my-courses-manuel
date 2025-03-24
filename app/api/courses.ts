@@ -1,6 +1,6 @@
 import { camelizeKeys } from 'humps';
 
-const BASE_URL = 'https://pr-42389.masterclass.dev';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 const USER_EMAIL = 'manuel@rootstrap.com';
 
 const headers = {
