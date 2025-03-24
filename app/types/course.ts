@@ -1,6 +1,7 @@
 type Course = {
-  id: string;
+  id: number;
   title: string;
   instructorName: string;
   instructorImageUrl: string;
+  favorite: boolean;
 };

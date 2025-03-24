@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
-import CourseList from '@/app/components/CourseList';
 import { fetchCourses } from '@/app/api/courses';
+import CourseList from '@/app/components/CourseList';
+import { Toaster } from 'react-hot-toast';
 
 export default function CoursesPage() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -26,6 +26,14 @@ export default function CoursesPage() {
 
     loadCourses();
   }, []);
+
+  const handleFavoriteToggle = (updatedCourse: Course) => {
+    setCourses((prevCourses) =>
+      prevCourses.map((course) =>
+        course.id === updatedCourse.id ? updatedCourse : course
+      )
+    );
+  };
 
   if (loading) {
     return (
@@ -57,11 +65,13 @@ export default function CoursesPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
+      <Toaster position="top-right" />
+
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
         <h1 className="text-3xl font-bold">MasterClass Courses</h1>
       </div>
 
-      <CourseList courses={courses} />
+      <CourseList courses={courses} onFavoriteToggle={handleFavoriteToggle} />
     </div>
   );
 }
